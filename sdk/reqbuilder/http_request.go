@@ -1,7 +1,7 @@
 package reqbuilder
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 
@@ -17,7 +17,10 @@ func HttpGet(url string) (string, error) {
 		return "", err
 	}
 	defer resp.Body.Close()
-	result, err := ioutil.ReadAll(resp.Body)
+	result, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
 
 	logger.StopAndLog("GET", url)
 
@@ -33,7 +36,10 @@ func HttpPost(url string, body string) (string, error) {
 		return "", err
 	}
 	defer resp.Body.Close()
-	result, err := ioutil.ReadAll(resp.Body)
+	result, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
 
 	logger.StopAndLog("POST", url)
 

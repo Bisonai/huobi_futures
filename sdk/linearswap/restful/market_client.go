@@ -65,6 +65,44 @@ func (mc *MarketClient) GetContractInfoAsync(data chan market.GetContractInfoRes
 	data <- result
 }
 
+func (mc *MarketClient) GetContractInfo(contractCode string, supportMarginMode string, pair string, contractType string, businessType string) (market.GetContractInfoResponse, error) {
+	// location
+	location := "/linear-swap-api/v1/swap_contract_info"
+
+	// option
+	option := ""
+	if contractCode != "" {
+		option += fmt.Sprintf("contract_code=%s", contractCode)
+	}
+	if supportMarginMode != "" {
+		option += fmt.Sprintf("&support_margin_mode=%s", supportMarginMode)
+	}
+	if pair != "" {
+		option += fmt.Sprintf("&pair=%s", pair)
+	}
+	if contractType != "" {
+		option += fmt.Sprintf("&contract_type=%s", contractType)
+	}
+	if businessType != "" {
+		option += fmt.Sprintf("&business_type=%s", businessType)
+	}
+	if option != "" {
+		location += fmt.Sprintf("?%s", option)
+	}
+
+	result := market.GetContractInfoResponse{}
+	url := mc.PUrlBuilder.Build(location, nil)
+	getResp, getErr := reqbuilder.HttpGet(url)
+	if getErr != nil {
+		return result, getErr
+	}
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return result, fmt.Errorf("convert json(%s) failed with error: %w", getResp, jsonErr)
+	}
+	return result, nil
+}
+
 // GetIndexAsync [General] Query Swap Index Price Information
 func (mc *MarketClient) GetIndexAsync(data chan market.GetIndexResponse, contractCode string) {
 	// location

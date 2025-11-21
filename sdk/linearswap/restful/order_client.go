@@ -47,6 +47,29 @@ func (oc *OrderClient) IsolatedPlaceOrderAsync(data chan responseorder.PlaceOrde
 	data <- result
 }
 
+func (oc *OrderClient) IsolatedPlaceOrder(request requestorder.PlaceOrderRequest) (responseorder.PlaceOrderResponse, error) {
+	url := oc.PUrlBuilder.Build(linearswap.POST_METHOD, "/linear-swap-api/v1/swap_order", nil)
+
+	result := responseorder.PlaceOrderResponse{}
+
+	content, err := json.Marshal(request)
+	if err != nil {
+		return result, fmt.Errorf("PlaceOrderRequest(%v) to json error: %v", request, err)
+	}
+
+	getResp, getErr := reqbuilder.HttpPost(url, string(content))
+	if getErr != nil {
+		return result, fmt.Errorf("http get error: %s", getErr)
+	}
+
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return result, fmt.Errorf("convert json(%s) to PlaceOrderResponse error: %s", getResp, jsonErr)
+	}
+
+	return result, nil
+}
+
 // CrossPlaceOrderAsync ([Cross] Place An Order)
 func (oc *OrderClient) CrossPlaceOrderAsync(data chan responseorder.PlaceOrderResponse, request requestorder.PlaceOrderRequest) {
 	url := oc.PUrlBuilder.Build(linearswap.POST_METHOD, "/linear-swap-api/v1/swap_cross_order", nil)
@@ -218,6 +241,27 @@ func (oc *OrderClient) IsolatedSwitchLeverRateAsync(data chan responseorder.Swit
 		log.Error("convert json to SwitchLeverRateResponse error: %s", getErr)
 	}
 	data <- result
+}
+
+func (oc *OrderClient) IsolatedSwitchLeverRate(contractCode string, leverRate int) (responseorder.SwitchLeverRateResponse, error) {
+	// url
+	url := oc.PUrlBuilder.Build(linearswap.POST_METHOD, "/linear-swap-api/v1/swap_switch_lever_rate", nil)
+
+	// content
+	content := fmt.Sprintf("{\"contract_code\": \"%s\", \"lever_rate\": %d}", contractCode, leverRate)
+
+	result := responseorder.SwitchLeverRateResponse{}
+	getResp, getErr := reqbuilder.HttpPost(url, content)
+	if getErr != nil {
+		return result, fmt.Errorf("http get error: %s", getErr)
+	}
+
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return result, fmt.Errorf("convert json(%s) to SwitchLeverRateResponse error: %s", getResp, jsonErr)
+	}
+
+	return result, nil
 }
 
 // CrossSwitchLeverRateAsync ([Cross] Switch Leverage)
@@ -870,6 +914,38 @@ func (oc *OrderClient) SwapSwitchPositionModeAsync(data chan responseorder.SwapS
 		log.Error("convert json to SwapSwitchPositionModeResponse error: %s", getErr)
 	}
 	data <- result
+}
+
+func (oc *OrderClient) SwapSwitchPositionMode(marginAccount string, positionMode string) (responseorder.SwapSwitchPositionModeResponse, error) {
+	// url
+	url := oc.PUrlBuilder.Build(linearswap.POST_METHOD, "/linear-swap-api/v1/swap_switch_position_mode", nil)
+
+	// content
+	content := ""
+	if marginAccount != "" {
+		content += fmt.Sprintf(",\"margin_account\": \"%s\"", marginAccount)
+	}
+	if positionMode != "" {
+		content += fmt.Sprintf(",\"position_mode\": \"%s\"", positionMode)
+	}
+
+	if content != "" {
+		content = fmt.Sprintf("{%s}", content[1:])
+	}
+
+	result := responseorder.SwapSwitchPositionModeResponse{}
+
+	getResp, getErr := reqbuilder.HttpPost(url, content)
+	if getErr != nil {
+		return result, fmt.Errorf("http get error: %s", getErr)
+	}
+
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return result, fmt.Errorf("convert json(%s) to SwapSwitchPositionModeResponse error: %s", getResp, jsonErr)
+	}
+
+	return result, nil
 }
 
 // SwapCrossSwitchPositionModeAsync ([Cross]Switch Position Mode)

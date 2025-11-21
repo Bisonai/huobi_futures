@@ -147,6 +147,40 @@ func (ac *AccountClient) IsolatedGetAccountPositionAsync(data chan account.GetAc
 	data <- result
 }
 
+func (ac *AccountClient) IsolatedGetAccountPosition(contractCode string, subUid int64) (account.GetAccountPositionResponse, error) {
+	// ulr
+	url := ac.PUrlBuilder.Build(linearswap.POST_METHOD, "/linear-swap-api/v1/swap_position_info", nil)
+	if subUid != 0 {
+		url = ac.PUrlBuilder.Build(linearswap.POST_METHOD, "/linear-swap-api/v1/swap_sub_account_info", nil)
+	}
+
+	// content
+	content := ""
+	if contractCode != "" {
+		content = fmt.Sprintf(",\"contract_code\": \"%s\"", contractCode)
+	}
+	if subUid != 0 {
+		content += fmt.Sprintf(",\"sub_uid\": %d", subUid)
+	}
+	if content != "" {
+		content = fmt.Sprintf("{%s}", content[1:])
+	}
+
+	result := account.GetAccountPositionResponse{}
+
+	getResp, getErr := reqbuilder.HttpPost(url, content)
+	if getErr != nil {
+		return result, fmt.Errorf("http get error: %s", getErr)
+	}
+
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return result, fmt.Errorf("convert json(%s) to GetAccountPositionResponse error: %s", getResp, jsonErr)
+	}
+
+	return result, nil
+}
+
 // CrossGetAccountPositionAsync [Cross] Query User's Position Information and [Cross] Query A Sub-Account's Position Information
 func (ac *AccountClient) CrossGetAccountPositionAsync(data chan account.GetAccountPositionResponse, contractCode string, contractType string, pair string, subUid int64) {
 	// ulr
@@ -202,6 +236,28 @@ func (ac *AccountClient) IsolatedGetAssetsPositionAsync(data chan account.GetAss
 		log.Error("convert json to GetAssetsPositionResponse error: %s", jsonErr)
 	}
 	data <- result
+}
+
+func (ac *AccountClient) IsolatedGetAssetsPosition(contractCode string) (account.GetAssetsPositionResponse, error) {
+	// ulr
+	url := ac.PUrlBuilder.Build(linearswap.POST_METHOD, "/linear-swap-api/v1/swap_account_position_info", nil)
+
+	// content
+	content := fmt.Sprintf("{\"contract_code\": \"%s\"}", contractCode)
+
+	result := account.GetAssetsPositionResponse{}
+
+	getResp, getErr := reqbuilder.HttpPost(url, content)
+	if getErr != nil {
+		return result, fmt.Errorf("http get error: %s", getErr)
+	}
+
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return result, fmt.Errorf("convert json(%s) to GetAssetsPositionResponse error: %s", getResp, jsonErr)
+	}
+
+	return result, nil
 }
 
 // CrossGetAssetsPositionAsync [Cross] Query Assets And Positions
@@ -1040,6 +1096,22 @@ func (ac *AccountClient) GetAccountBalanceAsync(data chan account.GetAccountBala
 		log.Error("convert json error: %s", jsonErr)
 	}
 	data <- result
+}
+
+func (ac *AccountClient) GetAccountBalance() (account.GetAccountBalanceResponse, error) {
+	url := ac.PUrlBuilder.Build(linearswap.GET_METHOD, "/v5/account/balance", nil)
+	result := account.GetAccountBalanceResponse{}
+	getResp, getErr := reqbuilder.HttpGet(url)
+	if getErr != nil {
+		return result, getErr
+	}
+
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return result, fmt.Errorf("convert json(%s) failed with error: %w", getResp, jsonErr)
+	}
+
+	return result, nil
 }
 
 func (ac *AccountClient) SwapMultiAssetsMarginAsync(data chan account.SwapMultiAssetsMarginResponse, assetsMode int) {
