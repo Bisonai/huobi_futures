@@ -3,10 +3,11 @@ package ws
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/linearswap"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/linearswap/ws/response/centernotify"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/wsbase"
 	"reflect"
+
+	"github.com/bisonai/huobi_futures/sdk/linearswap"
+	"github.com/bisonai/huobi_futures/sdk/linearswap/ws/response/centernotify"
+	"github.com/bisonai/huobi_futures/sdk/wsbase"
 )
 
 type WSCenterNotifyClient struct {

@@ -3,11 +3,12 @@ package ws
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinfutures"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinfutures/ws/response/notify"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/wsbase"
 	"reflect"
 	"strings"
+
+	"github.com/bisonai/huobi_futures/sdk/coinfutures"
+	"github.com/bisonai/huobi_futures/sdk/coinfutures/ws/response/notify"
+	"github.com/bisonai/huobi_futures/sdk/wsbase"
 )
 
 type WSNotifyClient struct {

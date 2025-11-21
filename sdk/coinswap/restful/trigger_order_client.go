@@ -3,10 +3,11 @@ package restful
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinswap"
-	responsetriggerorder "github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinswap/restful/response/triggerorder"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/log"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/reqbuilder"
+
+	"github.com/bisonai/huobi_futures/sdk/coinswap"
+	responsetriggerorder "github.com/bisonai/huobi_futures/sdk/coinswap/restful/response/triggerorder"
+	"github.com/bisonai/huobi_futures/sdk/log"
+	"github.com/bisonai/huobi_futures/sdk/reqbuilder"
 )
 
 type TriggerOrderClient struct {

@@ -1,11 +1,11 @@
 package triggerorderclienttest
 
 import (
-	"github.com/HuobiRDCenter/huobi_futures_Golang/config"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinfutures/restful"
-	requesttiggerorder "github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinfutures/restful/request/triggerorder"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinfutures/restful/response/triggerorder"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/log"
+	"github.com/bisonai/huobi_futures/config"
+	"github.com/bisonai/huobi_futures/sdk/coinfutures/restful"
+	requesttiggerorder "github.com/bisonai/huobi_futures/sdk/coinfutures/restful/request/triggerorder"
+	"github.com/bisonai/huobi_futures/sdk/coinfutures/restful/response/triggerorder"
+	"github.com/bisonai/huobi_futures/sdk/log"
 )
 
 func RunAllExamples() {

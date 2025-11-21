@@ -1,11 +1,12 @@
 package wsnotifyclienttest
 
 import (
-	"github.com/HuobiRDCenter/huobi_futures_Golang/config"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/linearswap/ws"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/linearswap/ws/response/notify"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/log"
 	"time"
+
+	"github.com/bisonai/huobi_futures/config"
+	"github.com/bisonai/huobi_futures/sdk/linearswap/ws"
+	"github.com/bisonai/huobi_futures/sdk/linearswap/ws/response/notify"
+	"github.com/bisonai/huobi_futures/sdk/log"
 )
 
 func RunAllExamples() {

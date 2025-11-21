@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/linearswap"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/linearswap/restful/response/account"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/log"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/reqbuilder"
+	"github.com/bisonai/huobi_futures/sdk/linearswap"
+	"github.com/bisonai/huobi_futures/sdk/linearswap/restful/response/account"
+	"github.com/bisonai/huobi_futures/sdk/log"
+	"github.com/bisonai/huobi_futures/sdk/reqbuilder"
 )
 
 type AccountClient struct {

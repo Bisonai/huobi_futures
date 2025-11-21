@@ -1,10 +1,11 @@
 package wsmarketclienttest
 
 import (
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinfutures/ws"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinfutures/ws/response/market"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/log"
 	"time"
+
+	"github.com/bisonai/huobi_futures/sdk/coinfutures/ws"
+	"github.com/bisonai/huobi_futures/sdk/coinfutures/ws/response/market"
+	"github.com/bisonai/huobi_futures/sdk/log"
 )
 
 func RunAllExamples() {

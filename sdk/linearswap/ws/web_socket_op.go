@@ -4,13 +4,14 @@ import (
 	"container/list"
 	"encoding/json"
 	"fmt"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/linearswap"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/log"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/reqbuilder"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/wsbase"
 	"reflect"
 	"strings"
 	"time"
+
+	"github.com/bisonai/huobi_futures/sdk/linearswap"
+	"github.com/bisonai/huobi_futures/sdk/log"
+	"github.com/bisonai/huobi_futures/sdk/reqbuilder"
+	"github.com/bisonai/huobi_futures/sdk/wsbase"
 
 	"github.com/gorilla/websocket"
 )

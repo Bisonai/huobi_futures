@@ -1,10 +1,10 @@
 package marketclienttest
 
 import (
-	"github.com/HuobiRDCenter/huobi_futures_Golang/config"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinfutures/restful"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinfutures/restful/response/market"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/log"
+	"github.com/bisonai/huobi_futures/config"
+	"github.com/bisonai/huobi_futures/sdk/coinfutures/restful"
+	"github.com/bisonai/huobi_futures/sdk/coinfutures/restful/response/market"
+	"github.com/bisonai/huobi_futures/sdk/log"
 )
 
 func RunAllExamples() {

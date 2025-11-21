@@ -1,11 +1,12 @@
 package wscenternotifyclienttest
 
 import (
-	"github.com/HuobiRDCenter/huobi_futures_Golang/config"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinswap/ws"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/coinswap/ws/response/centernotify"
-	"github.com/HuobiRDCenter/huobi_futures_Golang/sdk/log"
 	"time"
+
+	"github.com/bisonai/huobi_futures/config"
+	"github.com/bisonai/huobi_futures/sdk/coinswap/ws"
+	"github.com/bisonai/huobi_futures/sdk/coinswap/ws/response/centernotify"
+	"github.com/bisonai/huobi_futures/sdk/log"
 )
 
 func RunAllExamples() {
