@@ -14,6 +14,10 @@ type TransferClient struct {
 	PUrlBuilder *reqbuilder.PrivateUrlBuilder
 }
 
+func NewTransferClient(accessKey string, secretKey string, host string) *TransferClient {
+	return new(TransferClient).Init(accessKey, secretKey, host)
+}
+
 func (tc *TransferClient) Init(accessKey string, secretKey string, host string) *TransferClient {
 	if host == "" {
 		host = linearswap.SPOT_DEFAULT_HOST

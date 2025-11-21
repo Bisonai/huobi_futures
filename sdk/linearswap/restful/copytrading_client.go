@@ -15,6 +15,10 @@ type CopytradingClient struct {
 	PUrlBuilder *reqbuilder.PrivateUrlBuilder
 }
 
+func NewCopytradingClient(accessKey string, secretKey string, host string) *CopytradingClient {
+	return new(CopytradingClient).Init(accessKey, secretKey, host)
+}
+
 func (oc *CopytradingClient) Init(accessKey string, secretKey string, host string) *CopytradingClient {
 	if host == "" {
 		host = linearswap.LINEAR_SWAP_DEFAULT_HOST

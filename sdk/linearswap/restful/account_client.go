@@ -14,6 +14,10 @@ type AccountClient struct {
 	PUrlBuilder *reqbuilder.PrivateUrlBuilder
 }
 
+func NewAccountClient(accessKey string, secretKey string, host string) *AccountClient {
+	return new(AccountClient).Init(accessKey, secretKey, host)
+}
+
 func (ac *AccountClient) Init(accessKey string, secretKey string, host string) *AccountClient {
 	if host == "" {
 		host = linearswap.LINEAR_SWAP_DEFAULT_HOST

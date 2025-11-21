@@ -15,6 +15,10 @@ type TriggerOrderClient struct {
 	PUrlBuilder *reqbuilder.PrivateUrlBuilder
 }
 
+func NewTriggerOrderClient(accessKey string, secretKey string, host string) *TriggerOrderClient {
+	return new(TriggerOrderClient).Init(accessKey, secretKey, host)
+}
+
 func (toc *TriggerOrderClient) Init(accessKey string, secretKey string, host string) *TriggerOrderClient {
 	if host == "" {
 		host = linearswap.LINEAR_SWAP_DEFAULT_HOST

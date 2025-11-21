@@ -14,6 +14,10 @@ type CommonClient struct {
 	PUrlBuilder *reqbuilder.PrivateUrlBuilder
 }
 
+func NewCommonClient(accessKey string, secretKey string, host string) *CommonClient {
+	return new(CommonClient).Init(accessKey, secretKey, host)
+}
+
 func (ac *CommonClient) Init(accessKey string, secretKey string, host string) *CommonClient {
 	if host == "" {
 		host = linearswap.LINEAR_SWAP_DEFAULT_HOST

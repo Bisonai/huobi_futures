@@ -15,6 +15,10 @@ type OrderClient struct {
 	PUrlBuilder *reqbuilder.PrivateUrlBuilder
 }
 
+func NewOrderClient(accessKey string, secretKey string, host string) *OrderClient {
+	return new(OrderClient).Init(accessKey, secretKey, host)
+}
+
 func (oc *OrderClient) Init(accessKey string, secretKey string, host string) *OrderClient {
 	if host == "" {
 		host = linearswap.LINEAR_SWAP_DEFAULT_HOST
