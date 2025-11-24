@@ -1,7 +1,7 @@
 package account
 
 type GetAccountBalanceResponse struct {
-	Code string `json:"code"`
+	Code int `json:"code"`
 
 	Data []struct {
 		State                 string `json:"state"`
