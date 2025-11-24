@@ -29,7 +29,7 @@ type GetAccountBalanceResponse struct {
 		} `json:"details"`
 	} `json:"data,omitempty"`
 
-	Message int `json:"message,omitempty"`
+	Message string `json:"message,omitempty"`
 
 	Ts int64 `json:"ts"`
 }
