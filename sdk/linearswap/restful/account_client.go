@@ -1136,6 +1136,41 @@ func (ac *AccountClient) SwapMultiAssetsMarginAsync(data chan account.SwapMultiA
 	data <- result
 }
 
+func (ac *AccountClient) SetAssetMode(assetMode int) (account.AssetModeResponse, error) {
+	url := ac.PUrlBuilder.Build(linearswap.POST_METHOD, "/v5/account/asset_mode", nil)
+	content := ""
+	content += fmt.Sprintf(",\"assets_mode\": \"%d\"", assetMode)
+	if content != "" {
+		content = fmt.Sprintf("{%s}", content[1:])
+	}
+
+	result := account.AssetModeResponse{}
+	getResp, getErr := reqbuilder.HttpPost(url, content)
+	if getErr != nil {
+		return result, fmt.Errorf("http get error: %s", getErr)
+	}
+
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return result, fmt.Errorf("convert json(%s) to SetAssetModeResponse error: %s", getResp, jsonErr)
+	}
+	return result, nil
+}
+
+func (ac *AccountClient) GetAssetMode() (account.AssetModeResponse, error) {
+	url := ac.PUrlBuilder.Build(linearswap.GET_METHOD, "/v5/account/asset_mode", nil)
+	result := account.AssetModeResponse{}
+	getResp, getErr := reqbuilder.HttpGet(url)
+	if getErr != nil {
+		return result, fmt.Errorf("http get error: %s", getErr)
+	}
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return result, fmt.Errorf("convert json(%s) to AssetModeResponse error: %s", getResp, jsonErr)
+	}
+	return result, nil
+}
+
 func (ac *AccountClient) InviteeRebateAllRebateDetailAsync(data chan account.InviteeRebateAllRebateDetailResponse, direct string, fromId string,
 	limit int64) {
 	// ulr
