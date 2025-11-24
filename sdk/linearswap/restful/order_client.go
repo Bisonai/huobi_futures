@@ -1500,6 +1500,31 @@ func (ac *AccountClient) GetTradePositionOpensAsync(data chan responseorder.GetT
 	data <- result
 }
 
+func (ac *AccountClient) GetTraderPositionOpens(contractCode string) (responseorder.GetTradePositionOpensResponse, error) {
+	url := ac.PUrlBuilder.Build(linearswap.GET_METHOD, "/v5/trade/position/opens", nil)
+	// option
+	option := ""
+	if contractCode != "" {
+		option += fmt.Sprintf("?contract_code=%s", contractCode)
+	}
+	if option != "" {
+		url += option
+	}
+	result := responseorder.GetTradePositionOpensResponse{}
+
+	getResp, getErr := reqbuilder.HttpGet(url)
+	if getErr != nil {
+		return result, fmt.Errorf("http get error: %s", getErr)
+	}
+
+	jsonErr := json.Unmarshal([]byte(getResp), &result)
+	if jsonErr != nil {
+		return result, fmt.Errorf("convert json(%s) to GetTradePositionOpensResponse error: %s", getResp, jsonErr)
+	}
+
+	return result, nil
+}
+
 func (ac *AccountClient) GetTradePositionHistoryAsync(data chan responseorder.GetTradePositionHistoryResponse,
 	contractCode string, contractType string, marginMode string, startTime string, endTime string, from int,
 	limit int, direct string) {
