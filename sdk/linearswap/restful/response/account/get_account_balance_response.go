@@ -11,8 +11,8 @@ type GetAccountBalanceResponse struct {
 		MaintenanceMarginRate string `json:"maintenance_margin_rate"`
 		ProfitUnreal          string `json:"profit_unreal"`
 		AvailableMargin       string `json:"available_margin"`
-		CreatedTime           string `json:"created_time"`
-		UpdatedTime           string `json:"updated_time"`
+		CreatedTime           int64  `json:"created_time"`
+		UpdatedTime           int64  `json:"updated_time"`
 		Details               []struct {
 			Currency              string `json:"currency"`
 			Equity                string `json:"equity"`
