@@ -24,8 +24,8 @@ type GetAccountBalanceResponse struct {
 			MaintenanceMargin     string `json:"maintenance_margin"`
 			MaintenanceMarginRate string `json:"maintenance_margin_rate"`
 			InitialMarginRate     string `json:"initial_margin_rate"`
-			CreatedTime           string `json:"created_time"`
-			UpdatedTime           string `json:"updated_time"`
+			CreatedTime           int64  `json:"created_time"`
+			UpdatedTime           int64  `json:"updated_time"`
 		} `json:"details"`
 	} `json:"data,omitempty"`
 
